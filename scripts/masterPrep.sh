@@ -13,9 +13,9 @@ sleep 10
 # Register Host with Cloud Access Subscription
 echo $(date) " - Register host with Cloud Access Subscription"
 
-yum install -y subscription-manager 
+yum install -y subscription-manager
 
-subscription-manager register --force --username="$USERNAME_ORG" --password="$PASSWORD_ACT_KEY" || subscription-manager register --force --activationkey="$PASSWORD_ACT_KEY" --org="$USERNAME_ORG"
+subscription-manager register --force --insecure --username="$USERNAME_ORG" --password="$PASSWORD_ACT_KEY" || subscription-manager register --force --insecure --activationkey="$PASSWORD_ACT_KEY" --org="$USERNAME_ORG"
 RETCODE=$?
 
 if [ $RETCODE -eq 0 ]
@@ -26,7 +26,7 @@ then
     echo "This system is already registered."
 else
     sleep 5
-	subscription-manager register --force --username="$USERNAME_ORG" --password="$PASSWORD_ACT_KEY" || subscription-manager register --force --activationkey="$PASSWORD_ACT_KEY" --org="$USERNAME_ORG"
+	subscription-manager register --force --insecure --username="$USERNAME_ORG" --password="$PASSWORD_ACT_KEY" || subscription-manager register --force --insecure --activationkey="$PASSWORD_ACT_KEY" --org="$USERNAME_ORG"
 	RETCODE2=$?
 	if [ $RETCODE2 -eq 0 ]
 	then
