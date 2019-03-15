@@ -33,6 +33,8 @@ sleep 10
 # Register Host with Cloud Access Subscription
 echo $(date) " - Register host with Cloud Access Subscription"
 
+yum install -y subscription-manager
+
 subscription-manager register --force --username="$USERNAME_ORG" --password="$PASSWORD_ACT_KEY" || subscription-manager register --force --activationkey="$PASSWORD_ACT_KEY" --org="$USERNAME_ORG"
 RETCODE=$?
 
@@ -123,7 +125,7 @@ echo $(date) " - Updating ansible.cfg file"
 wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 5 https://raw.githubusercontent.com/microsoft/openshift-container-platform-playbooks/master/updateansiblecfg.yaml
 ansible-playbook -f 10 ./updateansiblecfg.yaml
 
-# Create certificate files 
+# Create certificate files
 
 if [[ $CUSTOMMASTERCERTTYPE == "custom" ]]
 then
@@ -144,4 +146,3 @@ then
 fi
 
 echo $(date) " - Script Complete"
-
