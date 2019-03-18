@@ -21,6 +21,8 @@ sleep 10
 # Register Host with Cloud Access Subscription
 echo $(date) " - Register host with Cloud Access Subscription"
 
+yum install -y subscription-manager
+
 subscription-manager register --username="$USERNAME_ORG" --password="$PASSWORD_ACT_KEY" || subscription-manager register --activationkey="$PASSWORD_ACT_KEY" --org="$USERNAME_ORG"
 RETCODE=$?
 
@@ -103,4 +105,3 @@ wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 5 https
 ansible-playbook -f 10 ./updateansiblecfg.yaml
 
 echo $(date) " - Script Complete"
-

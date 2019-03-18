@@ -16,6 +16,8 @@ sleep 10
 # Register Host with Cloud Access Subscription
 echo $(date) " - Register host with Cloud Access Subscription"
 
+yum install -y subscription-manager
+
 subscription-manager register --username="$USERNAME_ORG" --password="$PASSWORD_ACT_KEY" || subscription-manager register --activationkey="$PASSWORD_ACT_KEY" --org="$USERNAME_ORG"
 RETCODE=$?
 
@@ -89,7 +91,7 @@ yum -y install atomic-openshift-utils
 
 # Install Docker
 echo $(date) " - Installing Docker"
-yum -y install docker 
+yum -y install docker
 
 # Update docker storage
 echo "
@@ -156,4 +158,3 @@ EOF
 fi
 
 echo $(date) " - Script Complete"
-
