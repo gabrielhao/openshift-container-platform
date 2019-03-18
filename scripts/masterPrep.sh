@@ -18,7 +18,7 @@ echo $(date) " - Register host with Cloud Access Subscription"
 
 yum install -y subscription-manager
 
-subscription-manager register --username="$USERNAME_ORG" --password="$PASSWORD_ACT_KEY" || subscription-manager register --activationkey="$PASSWORD_ACT_KEY" --org="$USERNAME_ORG"
+subscription-manager register --insecure --username="$USERNAME_ORG" --password="$PASSWORD_ACT_KEY" || subscription-manager register --insecure --activationkey="$PASSWORD_ACT_KEY" --org="$USERNAME_ORG"
 RETCODE=$?
 
 if [ $RETCODE -eq 0 ]
