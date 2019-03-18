@@ -65,7 +65,8 @@ then
     export CLOUDNAME="AzureUSGovernmentCloud"
 else
     DOCKERREGISTRYYAML=dockerregistrypublic.yaml
-    export CLOUDNAME="AzurePublicCloud"
+    # export CLOUDNAME="AzurePublicCloud"
+    export CLOUDNAME="AzureChinaCloud"
 fi
 
 # Setting the default openshift_cloudprovider_kind if Azure enabled
@@ -122,7 +123,7 @@ do
 $MASTER-$c openshift_node_labels=\"{'region': 'master', 'zone': 'default'}\" openshift_hostname=$MASTER-$c"
 done
 
-# Create Infra nodes grouping 
+# Create Infra nodes grouping
 echo $(date) " - Creating Infra nodes grouping"
 for (( c=0; c<$INFRACOUNT; c++ ))
 do
@@ -374,7 +375,7 @@ then
     # Create Storage Classes
     echo $(date) " - Creating Storage Classes"
     runuser $SUDOUSER -c "ansible-playbook -f 10 ~/openshift-container-platform-playbooks/configurestorageclass.yaml"
-fi 
+fi
 
 # Reconfigure glusterfs storage class
 if [ $CNS_DEFAULT_STORAGE == "true" ]
@@ -501,4 +502,3 @@ echo $(date) " - Sleep for 30"
 sleep 30
 
 echo $(date) " - Script complete"
-
